@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1>Fazer login com uma conta cadastrada:</h1>
+        <h1>Fazer login:</h1>
         <p><input type="text" placeholder="Email" v-model="email" /></p>
         <p><input type="password" placeholder="Password" v-model="password" /></p>
         <p v-if="errMsg">{{ errMsg }}</p>
@@ -12,7 +12,7 @@
 <script setup>
 
     import { ref } from "vue";
-    import { getAuth, signWithEmailAndPassword } from "firebase/auth";
+    import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
     import { useRouter } from 'vue-router';
 
     const email = ref("");
@@ -22,7 +22,7 @@
 
     const register = () => {
         const auth = getAuth();
-        signWithEmailAndPassword(auth, email.value, password.value)
+        signInWithEmailAndPassword(auth, email.value, password.value)
         .then((data) => {
             console.log("Efetuado login com sucesso!");
             console.log(auth.currentUser);
@@ -48,7 +48,16 @@
     };
 
     const signInWithGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(getAuth(), provider)
+            .then((result) => {
+                console.log(result.user);
+                router.push("/feed");
+            })
+            .catch((error) => {
 
+            });
     };
+
 
 </script>
