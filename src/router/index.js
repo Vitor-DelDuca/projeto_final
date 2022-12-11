@@ -1,15 +1,41 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import About from '../views/About.vue';
+import ListUsers from '../views/ListUsers.vue';
+import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
+import Feed from '../views/Feed.vue';
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-        { path: "/", component: () => import("../views/Home.vue") },
-        { path: "/about", component: () => import("../views/About.vue") },
-        { path: "/listusers", component: () => import("../views/ListUsers.vue") },
-        { path: "/register", component: () => import("../views/Register.vue") },
-        { path: "/login", component: () => import("../views/Login.vue") },
-        { path: "/feed", component: () => import("../views/Feed.vue") },
-    ]
-});
+export const routerHistory = createWebHistory()
+export const router = createRouter({
+  history: routerHistory,
+  strict: true,
+  routes: [
+    {
+      path: '/',
+      component: Home
+    },
+    {
+      path: '/about',
+      component: About
+    },
+    {
+        path: '/listusers',
+        component: ListUsers
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/register',
+      component: Register
+    },
+    {
+        path: '/feed',
+        component: Feed
+      }
+  ]
+})
 
 export default router;
