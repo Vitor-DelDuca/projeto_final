@@ -1,6 +1,6 @@
 <template>
-    <div class="register">
-        <h1>Fazer login com uma conta</h1>
+    <div class="login">
+        <h1>Fazer login com uma conta cadastrada:</h1>
         <p><input type="text" placeholder="Email" v-model="email" /></p>
         <p><input type="password" placeholder="Password" v-model="password" /></p>
         <p v-if="errMsg">{{ errMsg }}</p>
@@ -12,8 +12,8 @@
 <script setup>
 
     import { ref } from "vue";
-    import { getAuth, signUserWithEmailAndPassword } from "firebase/auth";
-    import { useRouter } from 'vue-router'
+    import { getAuth, signWithEmailAndPassword } from "firebase/auth";
+    import { useRouter } from 'vue-router';
 
     const email = ref("");
     const password = ref("");
@@ -21,8 +21,8 @@
     const router = useRouter()
 
     const register = () => {
-        const auth = getAuth()
-        signUserWithEmailAndPassword(auth, email.value, password.value)
+        const auth = getAuth();
+        signWithEmailAndPassword(auth, email.value, password.value)
         .then((data) => {
             console.log("Efetuado login com sucesso!");
             console.log(auth.currentUser);
@@ -32,16 +32,16 @@
             console.log(error.code);
             switch (error.code) {
                 case "auth/invalid-email":
-                    errMsg.value = "E-mail invalido";
+                    errMsg.value = "Invalid email";
                     break;
                 case "auth/user-not-found":
-                    errMsg.value = "Nenhuma conta com esse e-mail foi encontrada";
+                    errMsg.value = "No account with that email was found";
                     break;
                 case "auth/wrong-password":
-                    errMsg.value = "Senha incorreta";
+                    errMsg.value = "Incorrect password";
                     break;
                 default:
-                    errMsg.value = "E-mail ou senha incorreto";
+                    errMsg.value = "Email or password was incorrect";
                     break;
             }
         });
