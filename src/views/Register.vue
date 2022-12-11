@@ -19,9 +19,11 @@
     const router = useRouter()
 
     const register = () => {
-        createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+        const auth = getAuth()
+        createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((data) => {
             console.log("registrado com sucesso!");
+            console.log(auth.currentUser);
             router.push('/feed')
         })
         .catch((error) => {
