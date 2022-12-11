@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3xhrv1RT-5fUYzxnNP4bX7MhE52N2t0Q",
-  authDomain: "desafio-emiolo.firebaseapp.com",
+  authDomain: "desafio-emiolo.firebaseapp.com", //http://localhost:5174/
   projectId: "desafio-emiolo",
   storageBucket: "desafio-emiolo.appspot.com",
   messagingSenderId: "1063087125828",
